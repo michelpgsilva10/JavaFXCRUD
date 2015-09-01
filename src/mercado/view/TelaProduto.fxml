@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane prefHeight="375.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+<BorderPane prefHeight="375.0" prefWidth="650.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mercado.view.TelaProdutoController">
    <top>
       <FlowPane alignment="CENTER" hgap="5.0" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
@@ -33,14 +33,14 @@
       </FlowPane>
    </bottom>
    <center>
-      <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+      <TableView fx:id="tabelaProdutos" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
         <columns>
-          <TableColumn prefWidth="75.0" text="Código" />
-          <TableColumn prefWidth="75.0" text="Nome" />
-            <TableColumn prefWidth="75.0" text="Estoque" />
-            <TableColumn prefWidth="75.0" text="Valor Compra" />
-            <TableColumn prefWidth="75.0" text="Promoção" />
-            <TableColumn prefWidth="75.0" text="Margem Lucro" />
+          <TableColumn fx:id="codigoColumn" prefWidth="75.0" text="Código" />
+          <TableColumn fx:id="nomeColumn" prefWidth="75.0" text="Nome" />
+            <TableColumn fx:id="estoqueColumn" prefWidth="75.0" text="Estoque" />
+            <TableColumn fx:id="valorCompraColumn" prefWidth="75.0" text="Valor Compra" />
+            <TableColumn fx:id="promocaoColumn" prefWidth="75.0" text="Promoção" />
+            <TableColumn fx:id="margemLucroColumn" prefWidth="75.0" text="Margem Lucro" />
             <TableColumn prefWidth="75.0" text="Grupo" />
         </columns>
          <columnResizePolicy>

@@ -1,6 +1,7 @@
 package mercado;
 
 import java.io.IOException;
+import java.sql.Connection;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -8,11 +9,13 @@ import javafx.scene.Scene;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import mercado.util.ConexaoBD;
+import mercado.view.TelaProdutoController;
 
 public class TelaPrincipal extends Application {
 
 	private Stage primaryStage;
 	private BorderPane telaPrincipal;
+	private Connection conexao;
 	
 	@Override
 	public void start(Stage primaryStage) {
@@ -21,6 +24,7 @@ public class TelaPrincipal extends Application {
 		primaryStage.setResizable(false);
 		
 		ConexaoBD conexao = new ConexaoBD();
+		this.conexao = conexao.getConexao();
 		
 		if (conexao.isConectado()) {
 			iniciarTelaPrincipal();
@@ -60,10 +64,21 @@ public class TelaPrincipal extends Application {
 			BorderPane telaProduto = (BorderPane) loader.load();
 			
 			telaPrincipal.setCenter(telaProduto);
+			
+			TelaProdutoController controller = loader.getController();
+			controller.setTelaPrincipal(this);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public Connection getConexao() {
+		return this.conexao;
+	}
+	
+	public void setConexao(Connection conexao) {
+		this.conexao = conexao;
 	}
 }
