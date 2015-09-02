@@ -2,12 +2,18 @@ package mercado;
 
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.SQLException;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import mercado.handler.ProdutoHandler;
+import mercado.model.Produto;
 import mercado.util.ConexaoBD;
 import mercado.view.TelaProdutoController;
 
@@ -15,21 +21,34 @@ public class TelaPrincipal extends Application {
 
 	private Stage primaryStage;
 	private BorderPane telaPrincipal;
-	private Connection conexao;
+	private ObservableList<Produto> produtos;
+	private ConexaoBD conexao;
+	
+	public TelaPrincipal() {
+		conexao = new ConexaoBD();
+		try {
+			produtos = ProdutoHandler.buscarProdutos(conexao.getConexao());
+		} catch (SQLException sqle) {
+			// TODO Auto-generated catch block
+			Alert alertSQL = new Alert(AlertType.ERROR);
+			alertSQL.setTitle("Erro ao Buscar Dados");
+			alertSQL.setHeaderText("Não foi possível retornar os produtos!");
+			alertSQL.setContentText(sqle.getMessage());
+			
+			alertSQL.showAndWait();
+		}
+	}
 	
 	@Override
 	public void start(Stage primaryStage) {
 		this.primaryStage = primaryStage;
 		primaryStage.setTitle("Gerenciamento de Produtos");
-		primaryStage.setResizable(false);
-		
-		ConexaoBD conexao = new ConexaoBD();
-		this.conexao = conexao.getConexao();
+		primaryStage.setResizable(false);		
 		
 		if (conexao.isConectado()) {
 			iniciarTelaPrincipal();
 			iniciarTelaProduto();
-		}
+		}	
 		
 	}
 
@@ -74,11 +93,23 @@ public class TelaPrincipal extends Application {
 		
 	}
 	
-	public Connection getConexao() {
-		return this.conexao;
+	public ObservableList<Produto> getListaProdutos() {
+		return this.produtos;
 	}
 	
-	public void setConexao(Connection conexao) {
-		this.conexao = conexao;
+	public void setListaProdutos(ObservableList<Produto> produtos) {
+		this.produtos = produtos;
+	}
+	
+	public Connection getConexao() {
+		return this.conexao.getConexao();
+	}
+	
+	public Stage getPrimaryStage() {
+		return this.primaryStage;
+	}
+	
+	public void setPrimaryStage(Stage primaryStage) {
+		this.primaryStage = primaryStage;
 	}
 }

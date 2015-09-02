@@ -13,7 +13,7 @@ public class ConexaoBD {
 	private boolean conectado = false;
 	
 	public ConexaoBD() {
-		String url = "jdbc:postgresql://localhost/postgres";
+		String url = "jdbc:postgresql://localhost/DSBBD";
 		
 		try {
 			Class.forName("org.postgresql.Driver");

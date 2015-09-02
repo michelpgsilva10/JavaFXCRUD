@@ -10,8 +10,8 @@
    <top>
       <FlowPane alignment="CENTER" hgap="5.0" prefHeight="50.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <TextField prefWidth="250.0" />
-            <Button mnemonicParsing="false" text="Buscar" />
+            <TextField fx:id="buscarField" prefWidth="250.0" />
+            <Button fx:id="buscarButton" mnemonicParsing="false" onAction="#buscarHandle" text="Buscar" />
          </children>
       </FlowPane>
    </top>
@@ -25,7 +25,7 @@
                   <Button mnemonicParsing="false" prefWidth="50.0" text="Excluir" />
                </children>
             </HBox>
-            <Button mnemonicParsing="false" prefWidth="50.0" text="Sair" />
+            <Button fx:id="sairButton" mnemonicParsing="false" onAction="#sairHandle" prefWidth="50.0" text="Sair" />
          </children>
          <padding>
             <Insets right="5.0" />
