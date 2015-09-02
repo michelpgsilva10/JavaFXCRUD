@@ -37,6 +37,7 @@ public class TelaProdutoController {
 	private Button sairButton;
 
 	private TelaPrincipal telaPrincipal;
+	private Produto produto;
 
 	@FXML
 	public void initialize() {
@@ -66,6 +67,15 @@ public class TelaProdutoController {
 	}
 	
 	@FXML
+	public void incluirHandle() {
+		Produto produto = new Produto();
+		boolean salvarClicked = telaPrincipal.iniciarDadosPessoa(produto);
+		
+		if (salvarClicked)
+			telaPrincipal.getListaProdutos().add(produto);
+	}
+	
+	@FXML
 	public void sairHandle() {
 		this.telaPrincipal.getPrimaryStage().close();
 	}
@@ -74,6 +84,10 @@ public class TelaProdutoController {
 		this.telaPrincipal = telaPrincipal;
 
 		tabelaProdutos.setItems(this.telaPrincipal.getListaProdutos());
+	}
+	
+	public void setProduto(Produto produto) {
+		this.produto = produto;
 	}
 
 }

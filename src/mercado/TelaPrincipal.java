@@ -11,10 +11,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import mercado.handler.ProdutoHandler;
 import mercado.model.Produto;
 import mercado.util.ConexaoBD;
+import mercado.view.DadosPessoaController;
 import mercado.view.TelaProdutoController;
 
 public class TelaPrincipal extends Application {
@@ -91,6 +93,36 @@ public class TelaPrincipal extends Application {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	public boolean iniciarDadosPessoa(Produto produto) {
+				
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(TelaPrincipal.class.getResource("view/DadosPessoa.fxml"));
+			
+			BorderPane dadosPessoa = (BorderPane) loader.load();
+			
+			Stage dadosPessoaDialog = new Stage();
+			dadosPessoaDialog.setTitle("Dados do Produto");
+			dadosPessoaDialog.initModality(Modality.WINDOW_MODAL);
+			dadosPessoaDialog.initOwner(primaryStage);
+			
+			Scene scene = new Scene(dadosPessoa);
+			dadosPessoaDialog.setScene(scene);
+			
+			DadosPessoaController controller = loader.getController();
+			controller.setDialogStage(dadosPessoaDialog);
+			controller.setProduto(produto);
+			
+			dadosPessoaDialog.showAndWait();
+			
+			return controller.isClickSalvar();			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
 	}
 	
 	public ObservableList<Produto> getListaProdutos() {

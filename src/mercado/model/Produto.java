@@ -17,7 +17,7 @@ public class Produto {
 	private final FloatProperty margemLucro;
 	
 	public Produto() {
-		this(null, null, null, null, null, null);
+		this(new Integer(0), null, new Integer(0), new Float(0.0), new Float(0.0), new Float(0.0));
 	}
 	
 	public Produto(Integer codigo, String nome, Integer estoque, Float valorCompra, Float promocao, Float margemLucro) {

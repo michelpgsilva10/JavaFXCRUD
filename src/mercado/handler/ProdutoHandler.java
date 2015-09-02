@@ -44,11 +44,18 @@ public class ProdutoHandler {
 			Produto prod = new Produto(resultado.getInt("codigo"), resultado.getString("nome"),
 					resultado.getInt("estoque"), resultado.getFloat("valorcompra"), resultado.getFloat("promocao"),
 					resultado.getFloat("margemlucro"));
-			
+
 			produtos.add(prod);
 		}
 
 		return produtos;
+	}
+
+	public static void incluirProduto(Connection conexao, Produto produto) throws SQLException {
+		PreparedStatement insert = null;
+
+		insert = conexao.prepareStatement(
+				"INSERT INTO produto (nome, estoque, valorcompra, promocao, margemlucro, grupoproduto)");
 	}
 
 }
