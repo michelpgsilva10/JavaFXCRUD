@@ -1,12 +1,17 @@
 package mercado.view;
 
+import java.sql.SQLException;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
+import mercado.handler.GrupoProdutoHandler;
+import mercado.model.GrupoProduto;
 import mercado.model.Produto;
+import mercado.util.ConexaoBD;
 
 public class DadosPessoaController {
 
@@ -21,15 +26,28 @@ public class DadosPessoaController {
 	@FXML
 	private TextField margemLucroField;
 	@FXML
-	private ComboBox<Produto> grupoProdutoCombo;
+	private ComboBox<GrupoProduto> grupoProdutoCombo;
 
 	private Produto produto;
 	private Stage dialogStage;
 	private boolean clickSalvar = false;
+	private ConexaoBD conexao;
 
 	@FXML
 	public void initialize() {
-
+		try {
+			conexao = new ConexaoBD();
+			
+			grupoProdutoCombo.setItems(GrupoProdutoHandler.listarGrupoProduto(conexao.getConexao()));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			Alert alertSQL = new Alert(AlertType.ERROR);
+			alertSQL.setTitle("Busca Grupo Produto");
+			alertSQL.setHeaderText("Não foi possível retornar os registros de Grupo Produto.");
+			alertSQL.setContentText(e.getMessage());
+			
+			alertSQL.showAndWait();
+		}
 	}
 
 	@FXML
@@ -50,6 +68,16 @@ public class DadosPessoaController {
 		alertaRegistroSalvo.showAndWait();
 		
 		getDialogStage().close();
+	}
+	
+	@FXML
+	public void fecharConexao() {
+		try {
+			conexao.getConexao().close();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML

@@ -19,12 +19,6 @@ public class ConexaoBD {
 			Class.forName("org.postgresql.Driver");
 			this.conexao = DriverManager.getConnection(url, "postgres", "15109");			
 			this.conectado = true;
-			
-			Alert alertConexao = new Alert(AlertType.INFORMATION);
-			alertConexao.setHeaderText("Conexão com o Banco de Dados");
-			alertConexao.setContentText("A conexão com o banco de dados foi realizada com sucesso!");
-			
-			alertConexao.showAndWait();
 		} catch (ClassNotFoundException cnfe) {
 			// TODO Auto-generated catch block
 			Alert alertFalhaClasse = new Alert(AlertType.ERROR);
