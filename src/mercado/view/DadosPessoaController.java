@@ -9,6 +9,7 @@ import javafx.scene.control.ComboBox;
 import javafx.stage.Stage;
 import javafx.scene.control.TextField;
 import mercado.handler.GrupoProdutoHandler;
+import mercado.handler.ProdutoHandler;
 import mercado.model.GrupoProduto;
 import mercado.model.Produto;
 import mercado.util.ConexaoBD;
@@ -52,11 +53,20 @@ public class DadosPessoaController {
 
 	@FXML
 	public void salvarHandle() {
-		Produto produto = new Produto(0, nomeField.getText(), Integer.parseInt(estoqueField.getText()),
-				Float.parseFloat(valorCompraField.getText()), Float.parseFloat(promocaoField.getText()),
-				Float.parseFloat(margemLucroField.getText()));
 		
-		this.produto = produto;
+		try {
+			GrupoProduto gpProduto = (GrupoProduto) grupoProdutoCombo.getValue();
+			
+			Produto produto = new Produto(0, nomeField.getText(), Integer.parseInt(estoqueField.getText()),
+					Float.parseFloat(valorCompraField.getText()), Float.parseFloat(promocaoField.getText()),
+					Float.parseFloat(margemLucroField.getText()), gpProduto, gpProduto.getNome());
+			
+			this.produto = produto;
+			ProdutoHandler.incluirProduto(conexao.getConexao(), produto);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		setClickSalvar(true);
 		

@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import javafx.application.Application;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -14,9 +13,7 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import mercado.handler.GrupoProdutoHandler;
 import mercado.handler.ProdutoHandler;
-import mercado.model.GrupoProduto;
 import mercado.model.Produto;
 import mercado.util.ConexaoBD;
 import mercado.view.DadosPessoaController;
@@ -98,8 +95,7 @@ public class TelaPrincipal extends Application {
 		
 	}
 	
-	public boolean iniciarDadosPessoa(Produto produto) {
-		ObservableList<GrupoProduto> grupoProduto = FXCollections.observableArrayList();
+	public boolean iniciarDadosProduto(Produto produto) {
 				
 		try {
 			FXMLLoader loader = new FXMLLoader();

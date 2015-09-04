@@ -9,52 +9,52 @@ import javafx.beans.property.StringProperty;
 
 public class GrupoProduto {
 
-	private final IntegerProperty codigo;
-	private final StringProperty nome;
-	private final FloatProperty promocao;
-	private final FloatProperty margemLucro;
+	private final IntegerProperty codigoGP;
+	private final StringProperty nomeGP;
+	private final FloatProperty promocaoGP;
+	private final FloatProperty margemLucroGP;
 	
 	public GrupoProduto() {
 		this(new Integer(0), null, new Float(0.0), new Float(0.0));
 	}
 	
 	public GrupoProduto(Integer codigo, String nome, Float promocao, Float margemLucro) {
-		this.codigo = new SimpleIntegerProperty(codigo.intValue());
-		this.nome = new SimpleStringProperty(nome);
-		this.promocao = new SimpleFloatProperty(promocao);
-		this.margemLucro = new SimpleFloatProperty(margemLucro);
+		this.codigoGP = new SimpleIntegerProperty(codigo.intValue());
+		this.nomeGP = new SimpleStringProperty(nome);
+		this.promocaoGP = new SimpleFloatProperty(promocao);
+		this.margemLucroGP = new SimpleFloatProperty(margemLucro);
 	}
 	
 	public Integer getCodigo() {
-		return this.codigo.get();
+		return this.codigoGP.get();
 	}
 	
 	public void setCodigo(Integer codigo) {
-		this.codigo.set(codigo.intValue());
+		this.codigoGP.set(codigo.intValue());
 	}
 	
 	public String getNome() {
-		return this.nome.get();
+		return this.nomeGP.get();
 	}
 	
 	public void setNome(String nome) {
-		this.nome.set(nome);
+		this.nomeGP.set(nome);
 	}
 	
 	public Float getPromocao() {
-		return this.promocao.get();
+		return this.promocaoGP.get();
 	}
 	
 	public void setPromocao(Float promocao) {
-		this.promocao.set(promocao);
+		this.promocaoGP.set(promocao);
 	}
 	
 	public Float getMargemLucro() {
-		return this.margemLucro.get();
+		return this.margemLucroGP.get();
 	}
 	
 	public void setMargemLucro(Float margemLucro) {
-		this.margemLucro.set(margemLucro);
+		this.margemLucroGP.set(margemLucro);
 	}
 	
 	@Override

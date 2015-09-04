@@ -11,6 +11,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import mercado.TelaPrincipal;
 import mercado.handler.ProdutoHandler;
+import mercado.model.GrupoProduto;
 import mercado.model.Produto;
 
 public class TelaProdutoController {
@@ -30,6 +31,8 @@ public class TelaProdutoController {
 	@FXML
 	private TableColumn<Produto, Float> margemLucroColumn;
 	@FXML
+	private TableColumn<Produto, GrupoProduto> nomeGPColumn;
+	@FXML
 	private TextField buscarField;
 	@FXML
 	private Button buscarButton;
@@ -47,6 +50,7 @@ public class TelaProdutoController {
 		valorCompraColumn.setCellValueFactory(new PropertyValueFactory<Produto, Float>("valorCompra"));
 		promocaoColumn.setCellValueFactory(new PropertyValueFactory<Produto, Float>("promocao"));
 		margemLucroColumn.setCellValueFactory(new PropertyValueFactory<Produto, Float>("margemLucro"));
+		nomeGPColumn.setCellValueFactory(new PropertyValueFactory<Produto, GrupoProduto>("gpProduto"));
 	}
 
 	@FXML
@@ -58,8 +62,8 @@ public class TelaProdutoController {
 			
 			tabelaProdutos.setItems(produtosNome);
 			
-			for (Produto p : produtosNome)
-				System.out.println(p.getNome());
+			for (Produto p : produtosNome) 
+				System.out.println(p.getNome() + ":" + p.getNomeGrupoProduto());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -69,10 +73,18 @@ public class TelaProdutoController {
 	@FXML
 	public void incluirHandle() {
 		Produto produto = new Produto();
-		boolean salvarClicked = telaPrincipal.iniciarDadosPessoa(produto);
+		boolean salvarClicked = telaPrincipal.iniciarDadosProduto(produto);		
 		
-		if (salvarClicked)
-			telaPrincipal.getListaProdutos().add(produto);
+		try {
+			if (salvarClicked) {
+				ObservableList<Produto> produtos = ProdutoHandler.buscarProdutos(telaPrincipal.getConexao());
+				telaPrincipal.setListaProdutos(produtos);
+				tabelaProdutos.setItems(produtos);				
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	@FXML
