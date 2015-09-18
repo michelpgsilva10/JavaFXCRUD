@@ -41,6 +41,10 @@ public class GrupoProduto {
 		this.nomeGP.set(nome);
 	}
 	
+	public StringProperty nomeGPProperty() {
+		return nomeGP;
+	}
+ 	
 	public Float getPromocao() {
 		return this.promocaoGP.get();
 	}
@@ -55,12 +59,6 @@ public class GrupoProduto {
 	
 	public void setMargemLucro(Float margemLucro) {
 		this.margemLucroGP.set(margemLucro);
-	}
-	
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return getNome();
 	}
 	
 }

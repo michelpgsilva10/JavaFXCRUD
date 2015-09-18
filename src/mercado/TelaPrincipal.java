@@ -80,7 +80,7 @@ public class TelaPrincipal extends Application {
 		
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(TelaPrincipal.class.getResource("view/TelaProduto.fxml"));
+			loader.setLocation(TelaPrincipal.class.getResource("view/ListaProdutos.fxml"));
 			
 			BorderPane telaProduto = (BorderPane) loader.load();
 			

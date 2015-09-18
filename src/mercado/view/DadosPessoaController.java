@@ -59,7 +59,7 @@ public class DadosPessoaController {
 			
 			Produto produto = new Produto(0, nomeField.getText(), Integer.parseInt(estoqueField.getText()),
 					Float.parseFloat(valorCompraField.getText()), Float.parseFloat(promocaoField.getText()),
-					Float.parseFloat(margemLucroField.getText()), gpProduto, gpProduto.getNome());
+					Float.parseFloat(margemLucroField.getText()), gpProduto);
 			
 			this.produto = produto;
 			ProdutoHandler.incluirProduto(conexao.getConexao(), produto);

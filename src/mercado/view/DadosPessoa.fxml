@@ -43,10 +43,10 @@
             <Label text="Promoção" GridPane.rowIndex="3" />
             <Label text="Margem de Lucro" GridPane.rowIndex="4" />
             <TextField fx:id="nomeField" GridPane.columnIndex="1" />
-            <TextField fx:id="estoqueField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-            <TextField fx:id="valorCompraField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <TextField fx:id="promocaoField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <TextField fx:id="margemLucroField" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <TextField fx:id="estoqueField" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="valorCompraField" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="promocaoField" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <TextField fx:id="margemLucroField" focusTraversable="false" GridPane.columnIndex="1" GridPane.rowIndex="4" />
             <Label text="Grupo Produto" GridPane.rowIndex="5" />
             <ComboBox fx:id="grupoProdutoCombo" prefWidth="150.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
          </children>

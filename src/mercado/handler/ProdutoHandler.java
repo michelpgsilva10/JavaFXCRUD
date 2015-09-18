@@ -31,7 +31,7 @@ public class ProdutoHandler {
 			
 			Produto prod = new Produto(resultado.getInt("codigo_produto"), resultado.getString("nome_produto"),
 					resultado.getInt("estoque"), resultado.getFloat("valorcompra"), resultado.getFloat("promocao_produto"),
-					resultado.getFloat("margem_lucro_produto"), gpProd, gpProd.getNome());
+					resultado.getFloat("margem_lucro_produto"), gpProd);
 
 			produtos.add(prod);
 		}
@@ -60,7 +60,7 @@ public class ProdutoHandler {
 
 			Produto prod = new Produto(resultado.getInt("codigo_produto"), resultado.getString("nome_produto"),
 					resultado.getInt("estoque"), resultado.getFloat("valorcompra"),
-					resultado.getFloat("promocao_produto"), resultado.getFloat("margem_lucro_produto"), gpProd, gpProd.getNome());
+					resultado.getFloat("promocao_produto"), resultado.getFloat("margem_lucro_produto"), gpProd);
 
 			produtos.add(prod);
 		}
@@ -80,7 +80,7 @@ public class ProdutoHandler {
 		insert.setFloat(3, produto.getValorCompra());
 		insert.setFloat(4, produto.getPromocao());
 		insert.setFloat(5, produto.getMargemLucro());
-		insert.setInt(6, produto.getGrupoProduto().getCodigo());
+		insert.setInt(6, produto.getGpProduto().getCodigo());
 
 		return insert.executeUpdate();
 	}

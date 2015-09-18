@@ -18,13 +18,12 @@ public class Produto {
 	private final FloatProperty promocao;
 	private final FloatProperty margemLucro;
 	private final ObjectProperty<GrupoProduto> gpProduto;
-	private final StringProperty nomeGP;
 	
 	public Produto() {
-		this(new Integer(0), null, new Integer(0), new Float(0.0), new Float(0.0), new Float(0.0), null, null);
+		this(new Integer(0), null, new Integer(0), new Float(0.0), new Float(0.0), new Float(0.0), null);
 	}
 	
-	public Produto(Integer codigo, String nome, Integer estoque, Float valorCompra, Float promocao, Float margemLucro, GrupoProduto gpProduto, String nomeGP) {
+	public Produto(Integer codigo, String nome, Integer estoque, Float valorCompra, Float promocao, Float margemLucro, GrupoProduto gpProduto) {
 		this.codigo = new SimpleIntegerProperty(codigo.intValue());
 		this.nome = new SimpleStringProperty(nome);
 		this.estoque = new SimpleIntegerProperty(estoque);
@@ -32,7 +31,6 @@ public class Produto {
 		this.promocao = new SimpleFloatProperty(promocao);
 		this.margemLucro = new SimpleFloatProperty(margemLucro);
 		this.gpProduto = new SimpleObjectProperty<GrupoProduto>(gpProduto);
-		this.nomeGP = new SimpleStringProperty(nomeGP);
 	}
 	
 	public Integer getCodigo() {
@@ -83,20 +81,12 @@ public class Produto {
 		this.margemLucro.set(margemLucro);
 	}
 	
-	public GrupoProduto getGrupoProduto() {
+	public GrupoProduto getGpProduto() {
 		return this.gpProduto.get();
 	}
 	
-	public void setGrupoProduto(GrupoProduto grupoProduto) {
+	public void setGpProduto(GrupoProduto grupoProduto) {
 		this.gpProduto.set(grupoProduto);
-	}
-	
-	public String getNomeGrupoProduto() {
-		return this.nomeGP.get();
-	}
-	
-	public void setNomeGrupoProduto(String nomeGP) {
-		this.nomeGP.set(nomeGP);
 	}
 
 }

@@ -2,13 +2,17 @@ package mercado.view;
 
 import java.sql.SQLException;
 
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.Callback;
 import mercado.TelaPrincipal;
 import mercado.handler.ProdutoHandler;
 import mercado.model.GrupoProduto;
@@ -50,7 +54,21 @@ public class TelaProdutoController {
 		valorCompraColumn.setCellValueFactory(new PropertyValueFactory<Produto, Float>("valorCompra"));
 		promocaoColumn.setCellValueFactory(new PropertyValueFactory<Produto, Float>("promocao"));
 		margemLucroColumn.setCellValueFactory(new PropertyValueFactory<Produto, Float>("margemLucro"));
-		nomeGPColumn.setCellValueFactory(new PropertyValueFactory<Produto, String>("nomeGP"));
+		
+		/*Para pegar dados de uma coluna que faz referência a outra classe, basta criar um método que retorna o Property do atributo
+		 * que se queira mostrar na tabela e dentro do setCellValueFactory no controller instanciar a classe Callback (Ligar corretamente no SceneBuilder
+		 * a variável da coluna, para não dar nullPointerException). Chamar através do método getValue() o atributo que chamará o Property
+		 * do atributo desejado. 
+		 */
+		nomeGPColumn.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Produto,String>, ObservableValue<String>>() {
+
+			@Override
+			public ObservableValue<String> call(CellDataFeatures<Produto, String> param) {
+				// TODO Auto-generated method stub
+				return param.getValue().getGpProduto().nomeGPProperty();
+			}
+		});
+		
 	}
 
 	@FXML
@@ -63,9 +81,6 @@ public class TelaProdutoController {
 			tabelaProdutos.getItems().clear();
 			
 			tabelaProdutos.setItems(produtosNome);
-			
-			for (Produto p : produtosNome) 
-				System.out.println(p.getNome() + ":" + p.getNomeGrupoProduto());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -96,10 +111,6 @@ public class TelaProdutoController {
 
 	public void setTelaPrincipal(TelaPrincipal telaPrincipal) {
 		this.telaPrincipal = telaPrincipal;
-		
-		for (Produto p : this.telaPrincipal.getListaProdutos()) {
-			System.out.println(p.getNomeGrupoProduto());
-		}
 
 		tabelaProdutos.setItems(this.telaPrincipal.getListaProdutos());
 	}
