@@ -98,4 +98,5 @@ public class Produto {
 	public void setNomeGrupoProduto(String nomeGP) {
 		this.nomeGP.set(nomeGP);
 	}
+
 }

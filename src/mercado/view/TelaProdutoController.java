@@ -31,7 +31,7 @@ public class TelaProdutoController {
 	@FXML
 	private TableColumn<Produto, Float> margemLucroColumn;
 	@FXML
-	private TableColumn<Produto, GrupoProduto> nomeGPColumn;
+	private TableColumn<Produto, String> nomeGPColumn;
 	@FXML
 	private TextField buscarField;
 	@FXML
@@ -50,7 +50,7 @@ public class TelaProdutoController {
 		valorCompraColumn.setCellValueFactory(new PropertyValueFactory<Produto, Float>("valorCompra"));
 		promocaoColumn.setCellValueFactory(new PropertyValueFactory<Produto, Float>("promocao"));
 		margemLucroColumn.setCellValueFactory(new PropertyValueFactory<Produto, Float>("margemLucro"));
-		nomeGPColumn.setCellValueFactory(new PropertyValueFactory<Produto, GrupoProduto>("gpProduto"));
+		nomeGPColumn.setCellValueFactory(new PropertyValueFactory<Produto, String>("nomeGP"));
 	}
 
 	@FXML
@@ -59,6 +59,8 @@ public class TelaProdutoController {
 		try {
 			produtosNome = ProdutoHandler.buscarProdutoNome(this.telaPrincipal.getConexao(),
 					buscarField.getText());
+			
+			tabelaProdutos.getItems().clear();
 			
 			tabelaProdutos.setItems(produtosNome);
 			
@@ -94,6 +96,10 @@ public class TelaProdutoController {
 
 	public void setTelaPrincipal(TelaPrincipal telaPrincipal) {
 		this.telaPrincipal = telaPrincipal;
+		
+		for (Produto p : this.telaPrincipal.getListaProdutos()) {
+			System.out.println(p.getNomeGrupoProduto());
+		}
 
 		tabelaProdutos.setItems(this.telaPrincipal.getListaProdutos());
 	}
