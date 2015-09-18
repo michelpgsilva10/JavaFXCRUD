@@ -2,7 +2,6 @@ package mercado.view;
 
 import java.sql.SQLException;
 
-import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -15,7 +14,6 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.util.Callback;
 import mercado.TelaPrincipal;
 import mercado.handler.ProdutoHandler;
-import mercado.model.GrupoProduto;
 import mercado.model.Produto;
 
 public class TelaProdutoController {
@@ -47,7 +45,7 @@ public class TelaProdutoController {
 	private Produto produto;
 
 	@FXML
-	public void initialize() {
+	public void initialize() {		
 		codigoColumn.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("codigo"));
 		nomeColumn.setCellValueFactory(new PropertyValueFactory<Produto, String>("nome"));
 		estoqueColumn.setCellValueFactory(new PropertyValueFactory<Produto, Integer>("estoque"));
