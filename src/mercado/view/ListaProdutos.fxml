@@ -21,7 +21,7 @@
             <HBox spacing="5.0">
                <children>
                   <Button mnemonicParsing="false" onAction="#incluirHandle" prefWidth="50.0" text="Incluir" />
-                  <Button mnemonicParsing="false" prefWidth="50.0" text="Editar" />
+                  <Button mnemonicParsing="false" onAction="#editarHandle" prefWidth="50.0" text="Editar" />
                   <Button mnemonicParsing="false" prefWidth="50.0" text="Excluir" />
                </children>
                <FlowPane.margin>

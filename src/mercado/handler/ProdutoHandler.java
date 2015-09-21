@@ -28,10 +28,10 @@ public class ProdutoHandler {
 			GrupoProduto gpProd = new GrupoProduto(resultado.getInt("codigo_gp_produto"),
 					resultado.getString("nome_gp_produto"), resultado.getFloat("promocao_gp_produto"),
 					resultado.getFloat("margem_lucro_gp_produto"));
-			
+
 			Produto prod = new Produto(resultado.getInt("codigo_produto"), resultado.getString("nome_produto"),
-					resultado.getInt("estoque"), resultado.getFloat("valorcompra"), resultado.getFloat("promocao_produto"),
-					resultado.getFloat("margem_lucro_produto"), gpProd);
+					resultado.getInt("estoque"), resultado.getFloat("valorcompra"),
+					resultado.getFloat("promocao_produto"), resultado.getFloat("margem_lucro_produto"), gpProd);
 
 			produtos.add(prod);
 		}
@@ -83,6 +83,24 @@ public class ProdutoHandler {
 		insert.setInt(6, produto.getGpProduto().getCodigo());
 
 		return insert.executeUpdate();
+	}
+
+	public static int editarProduto(Connection conexao, Produto produto) throws SQLException {
+		PreparedStatement update = null;
+
+		update = conexao.prepareStatement(
+				"UPDATE produto SET nome = ?, estoque = ?, valorcompra = ?, promocao = ?, margemlucro = ?, grupo = ?"
+						+ " WHERE codigo = ?");
+
+		update.setString(1, produto.getNome());
+		update.setInt(2, produto.getEstoque());
+		update.setFloat(3, produto.getValorCompra());
+		update.setFloat(4, produto.getPromocao());
+		update.setFloat(5, produto.getMargemLucro());
+		update.setInt(6, produto.getGpProduto().getCodigo());
+		update.setInt(7, produto.getCodigo());
+
+		return update.executeUpdate();
 	}
 
 }

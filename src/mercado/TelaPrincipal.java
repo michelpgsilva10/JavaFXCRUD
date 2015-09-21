@@ -95,11 +95,11 @@ public class TelaPrincipal extends Application {
 		
 	}
 	
-	public boolean iniciarDadosProduto(Produto produto) {
+	public boolean iniciarDadosProduto(Produto produto, int tipoModificacao) {
 				
 		try {
 			FXMLLoader loader = new FXMLLoader();
-			loader.setLocation(TelaPrincipal.class.getResource("view/DadosPessoa.fxml"));
+			loader.setLocation(TelaPrincipal.class.getResource("view/DadosProduto.fxml"));
 			
 			BorderPane dadosPessoa = (BorderPane) loader.load();
 			
@@ -114,6 +114,7 @@ public class TelaPrincipal extends Application {
 			DadosPessoaController controller = loader.getController();
 			controller.setDialogStage(dadosPessoaDialog);
 			controller.setProduto(produto);		
+			controller.setTipoModificacao(tipoModificacao);
 			
 			dadosPessoaDialog.showAndWait();
 			
@@ -123,7 +124,7 @@ public class TelaPrincipal extends Application {
 			ioe.printStackTrace();
 			return false;
 		} 
-	}
+	}	
 	
 	public ObservableList<Produto> getListaProdutos() {
 		return this.produtos;
