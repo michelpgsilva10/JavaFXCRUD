@@ -3,13 +3,16 @@ package mercado;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.Optional;
 
 import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.control.ButtonBar.ButtonData;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -125,6 +128,21 @@ public class TelaPrincipal extends Application {
 			return false;
 		} 
 	}	
+	
+	public Optional<ButtonType> excluirDadosProduto(Produto produto) {
+		Alert excluirProduto = new Alert(AlertType.WARNING);
+		excluirProduto.setTitle("Excluir Produto");
+		excluirProduto.setHeaderText("Excluir Produto?");
+		excluirProduto.setContentText("Deseja realmente excluir o produto '" + produto.getNome().trim() + "'?");	
+		
+		ButtonType yesButton = new ButtonType("Sim", ButtonData.YES);
+		ButtonType noButton = new ButtonType("Não", ButtonData.NO);
+		ButtonType cancelButton = new ButtonType("Cancelar", ButtonData.CANCEL_CLOSE);
+		
+		excluirProduto.getButtonTypes().setAll(yesButton, noButton, cancelButton);
+		
+		return excluirProduto.showAndWait();
+	}
 	
 	public ObservableList<Produto> getListaProdutos() {
 		return this.produtos;

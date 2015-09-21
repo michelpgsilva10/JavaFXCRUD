@@ -102,5 +102,14 @@ public class ProdutoHandler {
 
 		return update.executeUpdate();
 	}
+	
+	public static int excluirProduto(Connection conexao, Produto produto) throws SQLException {
+		PreparedStatement delete = null;
+		
+		delete = conexao.prepareStatement("DELETE FROM produto WHERE codigo = ?");
+		delete.setInt(1, produto.getCodigo());
+		
+		return delete.executeUpdate();
+	}
 
 }

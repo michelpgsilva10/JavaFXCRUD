@@ -1,6 +1,7 @@
 package mercado.view;
 
 import java.sql.SQLException;
+import java.util.Optional;
 
 import javafx.beans.value.ObservableValue;
 import javafx.collections.ObservableList;
@@ -8,6 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar.ButtonData;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableColumn.CellDataFeatures;
 import javafx.scene.control.TableView;
@@ -133,6 +136,28 @@ public class TelaProdutoController {
 			selecaoProduto.setHeaderText("Nenhum produto selecionado.");
 			selecaoProduto.setContentText("Você deve selecionar um produto para editar seus dados.");
 			selecaoProduto.showAndWait();
+		}
+	}
+	
+	@FXML
+	public void excluirHandle() {
+		Produto produto = tabelaProdutos.getSelectionModel().getSelectedItem();
+		
+		if (produto != null) {
+			Optional<ButtonType> btnType = telaPrincipal.excluirDadosProduto(produto);
+			
+			try {
+				if (btnType.get().getButtonData() == ButtonData.YES) {
+					ProdutoHandler.excluirProduto(telaPrincipal.getConexao(), produto);
+					ObservableList<Produto> produtos;
+					produtos = ProdutoHandler.buscarProdutos(telaPrincipal.getConexao());
+					telaPrincipal.setListaProdutos(produtos);
+					tabelaProdutos.setItems(produtos);
+				}
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 
