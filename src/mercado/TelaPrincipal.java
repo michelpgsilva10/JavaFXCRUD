@@ -98,6 +98,25 @@ public class TelaPrincipal extends Application {
 		
 	}
 	
+	public void iniciarTelaGrupoProduto() {
+		
+		try {
+			FXMLLoader loader = new FXMLLoader();
+			loader.setLocation(TelaPrincipal.class.getResource("view/ListaGrupoProduto.fxml"));
+			
+			BorderPane telaGrupoProduto;
+			
+			telaGrupoProduto = (BorderPane) loader.load();
+			
+			telaPrincipal.setCenter(telaGrupoProduto);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
+	}
+	
 	public boolean iniciarDadosProduto(Produto produto, int tipoModificacao) {
 				
 		try {
